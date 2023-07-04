@@ -21,7 +21,7 @@ let upload = multer({
   storage: storage,
   limit: { fileSize: 100000 * 100 }, // 100mb
 });
-
+// upload file on server route
 router.post("/", upload.single("myfile"), async (req, res) => {
   console.log(req.file);
   if (!req.file) {
@@ -43,5 +43,37 @@ router.post("/", upload.single("myfile"), async (req, res) => {
     file: `${process.env.APP_BASE_URL}/files/${response.uuid}`,
   });
 });
+
+// send mail route
+router.post("/send", async (req, res) => {
+  const { uuid, emailFrom, emailTo } = req.body;
+  // validate request
+    if (!uuid || !emailFrom || !emailTo) {
+      return res
+        .status(422)
+        .send({ error: "All fields are required except expiry." });
+    }
+
+  // get data from database
+ const file = await File.findOne({ uuid: uuid });
+ if (file.sender) {
+   return res.status(422).send({ error: "Email already sent once." });
+ }
+ file.sender = emailFrom;
+ file.receiver = emailTo;
+ const response = await file.save();
+
+  // now send file
+  const sendMail = require("../services/emailService");
+  sendMail({
+    from: emailFrom,
+    to: emailTo,
+    subject: "shareBuddy File Sharing",
+    text: `${emailFrom} shared file with you`,
+    html: `<h1> Hello from shareBuddy</h1>`,
+  });
+
+});
+
 
 module.exports = router;

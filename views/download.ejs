@@ -1,1 +1,68 @@
-download page template
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"> -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="icon" type="image/x-icon" href="/public/logo.png" />
+    <title>shareBuddy - a Simple.Beautiful.Seamless File Sharing App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!-- Fontawesome CDN Link For Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="main">
+      <!-- Navigation Menu  -->
+      <nav class="container">
+        <div class="logo">
+          <img src="/public/logo.png" alt="" />
+          <span>shareBuddy</span>
+        </div>
+      </nav>
+    </div>
+
+    <!-- popup model for email sent confirmation  -->
+    <div class="signup_success">
+      <% if(locals.error){ %>
+      <h4><%= locals.error %> 😏</h4>
+      <% } else { %>
+      <lottie-player
+        class="item"
+        src="https://lottie.host/de2b1f20-b4db-4ff9-be30-d4b9e0fe8664/ugp6afvlc5.json"
+        background="transparent"
+        speed="1"
+        style="width: 120px; height: 120px"
+        loop
+        autoplay
+      ></lottie-player>
+
+      <p class="item bold">Your file is ready to download</p>
+      <p class="item">Link expires in 24 hours</p>
+
+      <div class="download__meta item">
+        <p><%= fileName %></p>
+        <small class="bold"><%= parseInt(fileSize/1000) %> KB</small>
+      </div>
+
+      <div class="signup_success_btn item">
+        <a href="<%= downloadLink %>">Download file</a>
+      </div>
+      
+      <% } %>
+    </div>
+
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  </body>
+</html>

@@ -53,7 +53,7 @@ dropZone.addEventListener("drop", (e) => {
 });
 
 fileInput.addEventListener("change", () => {
-  const file = event.target.files[0]; // holds the information about file
+  // const file = event.target.files[0].name; // holds the information about file
   uploadFile();
 });
 
@@ -78,6 +78,7 @@ const uploadFile = () => {
     return;
   }
   const file = fileInput.files[0];
+  const filename = file.name;
   if (file.size > maxAllowedSize) {
     showToast("Error", "can't upload more than 100 MB");
     resetFileInput();
@@ -96,7 +97,7 @@ const uploadFile = () => {
     }
   };
 
-  xhr.upload.onprogress = updateProgress;
+  xhr.upload.onprogress = updateProgress(filename, this);
 
   xhr.upload.onerror = () => {
     resetFileInput();
@@ -109,15 +110,14 @@ const uploadFile = () => {
 // submit the email data form
 function submitForm(event) {
   event.preventDefault(); // Prevent form submission
-$(document).ready(function () {
-  $(".expires").text("Please be patient as we send the mail");
-});
+  $(document).ready(function () {
+    $(".expires").text("Please be patient as we send the mail");
+  });
   // Get form values
   const to = document.getElementById("to").value;
   const subject = document.getElementById("subject").value;
   const message = document.getElementById("message").value;
   const url = fileURLInput.value;
-
 
   // Construct request body
   const data = {
@@ -145,9 +145,8 @@ $(document).ready(function () {
         });
       }
       $(document).ready(function () {
-          $(".expires").text("Expires within 24 hours");
+        $(".expires").text("Expires within 24 hours");
       });
-   
     })
     .catch((error) => {
       // Handle network error
@@ -155,10 +154,11 @@ $(document).ready(function () {
     });
 }
 
-const updateProgress = (e) => {
+const updateProgress = (filename, e) => {
   const percent = Math.round((e.loaded / e.total) * 100);
   progress.style.width = `${percent}%`;
   percentDiv.innerText = percent;
+  $(".name").text(filename);
 };
 
 const onUploadSuccess = ({ file: url }) => {

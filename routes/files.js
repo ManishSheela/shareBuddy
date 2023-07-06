@@ -46,30 +46,32 @@ router.post("/", upload.single("myfile"), async (req, res) => {
 
 // send mail route
 router.post("/send", async (req, res) => {
-  const { uuid, emailFrom, emailTo } = req.body;
+  const { uuid, emailFrom, emailTo, subject, message } = req.body;
   // validate request
-    if (!uuid || !emailFrom || !emailTo) {
-      return res
-        .status(422)
-        .send({ error: "All fields are required except expiry." });
-    }
+  if (!uuid || !emailFrom || !emailTo) {
+    return res
+      .status(422)
+      .send({
+        error: "All fields are required except expiry, subject, message .",
+      });
+  }
 
   // get data from database
- const file = await File.findOne({ uuid: uuid });
- if (file.sender) {
-   return res.status(422).send({ error: "Email already sent once." });
- }
- file.sender = emailFrom;
- file.receiver = emailTo;
- const response = await file.save();
+  const file = await File.findOne({ uuid: uuid });
+  if (file.sender) {
+    return res.status(422).send({ error: "Email already sent once." });
+  }
+  file.sender = emailFrom;
+  file.receiver = emailTo;
+  const response = await file.save();
 
   // now send file
   const sendMail = require("../services/emailService");
   sendMail({
     from: emailFrom,
     to: emailTo,
-    subject: "shareBuddy File Sharing",
-    text: `${emailFrom} shared file with you`,
+    subject,
+    text: message,
     html: `<h1> Hello from shareBuddy</h1>`,
   });
 

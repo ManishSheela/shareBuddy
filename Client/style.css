@@ -1,0 +1,534 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500&display=swap');
+
+:root {
+    /* #A6A4E8 #ECE9F4 */
+    /* --dark-0-bg: #6D52CF; */
+    --main-bg: #7D67CF;
+    --light-0-color: #A6A4E8;
+    --btn-bg: #DEDFF5;
+    --text-color: #DEDFF5;
+    --text-dark-color: #092242;
+    --unique-bg: #E9F0FF;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Nunito Sans', sans-serif;
+    box-sizing: border-box;
+    color: white;
+    overflow: hidden;
+}
+
+.main {
+    position: relative;
+    height: 100vh;
+    min-height: 100vh;
+    width: 100%;
+    background-color: var(--main-bg);
+}
+
+.section-wrapper{
+    padding-top: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+
+.container {
+    width: 1100px;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo img {
+    height: 45px;
+    width: 45px;
+}
+
+.logo span {
+
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.btn {
+    border: none;
+    height: auto;
+    font-size: 16px;
+    padding: 8px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    text-align: center;
+    transition: 0.2s ease;
+    background-color: transparent;
+}
+
+.url-shortner-btn {
+    background-color: var(--btn-bg);
+}
+
+.main-heading {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.main-heading :nth-of-type(1) {
+    font-weight: bold;
+    font-size: 30px;
+    letter-spacing: 1.5px;
+}
+
+.main-heading :nth-of-type(2) {
+    font-size: 20px;
+    line-height: 50px;
+}
+
+section {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.left-section {
+    flex: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-section {
+    flex: 50%;
+    overflow: hidden;
+}
+
+.upload-container {
+    height: auto;
+    box-sizing: border-box;
+    padding: 15px;
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='10' ry='10' stroke='white' stroke-width='5' stroke-dasharray='10%2c 19' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+    border-radius: 10px;
+}
+
+.drop-zone {
+    background-color: white;
+    padding: 20px 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    width: 100%;
+    min-height: 250px;
+    color: var(--text-dark-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.uploadBtn {
+    padding: 5px;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transition: all 0.1s;
+}
+
+.drop-zone label {
+    cursor: pointer;
+}
+
+.uploadActive {
+    transform: scale(1.2);
+}
+
+#fileinput {
+    display: none;
+}
+
+footer {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%);
+    text-align: center;
+    color: var(--text-color);
+    /* padding-bottom: 5px; */
+}
+
+footer a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* email form styling  */
+form .form-group {
+    margin-bottom: 15px;
+}
+
+form label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+/* form select */
+textarea,
+form input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    outline: none;
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid var(--btn-bg);
+}
+
+form input:focus,
+textarea:focus,
+form select:focus {
+    border-color: #9a9a9a;
+}
+
+form input.error,
+form select.error {
+    border-color: #f91919;
+    background: #f9f0f1;
+}
+
+
+.tab-container .fa-solid {
+    color: var(--text-color);
+    position: absolute;
+    right: -30px;
+    top: -30px;
+    font-size: 30px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.tab-container .fa-solid:hover {
+    transform: rotate(-180deg);
+}
+
+/* popup template css  */
+
+.tab-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -45%);
+    color: black;
+    width: 350px;
+    padding: 15px 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    display: none;
+    transition: all 0.25s;
+}
+
+.menu-tabs {
+    background-color: var(--main-bg);
+    overflow: hidden;
+    padding: 5px 5px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.tab {
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: white;
+    flex: 50%;
+    transition: 0.5s all;
+}
+
+.active {
+    background-color: white;
+    color: var(--text-dark-color);
+}
+
+.tab-content {
+    width: 100%;
+    padding-top: 20px;
+    display: none;
+    /* transition: 1s ease; */
+    /* overflow: hidden; */
+    /* animation: slideInUp;
+    animation-duration: 1s; */
+}
+
+
+.submit-btn-wrapper {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--unique-bg);
+    border-radius: 10px;
+}
+
+.submit-btn-wrapper span {
+    font-size: 14px;
+}
+
+.submit-btn {
+    color: white;
+    background-color: var(--main-bg);
+}
+
+.submit-btn:active {
+    background-color: var(--light-0-color);
+}
+
+
+
+
+/* Email confirmation popup model  styling  */
+
+.signup_success {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--main-bg);
+    z-index: 10;
+    width: 350px;
+    height: 400px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.signup_success .item {
+    margin: 15px;
+}
+
+.signup_success :nth-child(1) {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    text-align: center;
+    color: var(--btn-bg);
+    font-size: 50px;
+    font-weight: bold;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup_success :nth-child(2) {
+    color: var(--white);
+    font-size: 22px;
+    text-align: center;
+}
+
+.signup_success :nth-child(3) {
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 100;
+}
+
+.signup_success :nth-child(4) {
+    padding: 15px 40px;
+    background: var(--btn-bg);
+    outline: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    color: var(--main-bg);
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.signup_success :nth-child(4):hover {
+    background: var(--light-0-color);
+    color: white;
+}
+
+/*signup Success Box style End Here*/
+
+
+
+::selection {
+    color: #fff;
+    background: var(--light-0-color);
+}
+
+.progress-area {
+    width: 100%;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+    display: none;
+}
+
+.progress-area .row {
+    background: #E9F0FF;
+    list-style: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.progress-area .row i {
+    color: var(--main-bg);
+    font-size: 30px;
+}
+
+.progress-area .details span {
+    font-size: 14px;
+}
+
+.progress-area .row .content {
+    width: 100%;
+    margin-left: 15px;
+}
+
+.progress-area .details {
+    display: flex;
+    align-items: center;
+    margin-bottom: 7px;
+    justify-content: space-between;
+}
+
+.progress-area .content .progress-bar {
+    height: 6px;
+    width: 100%;
+    margin-bottom: 4px;
+    background: #fff;
+    border-radius: 30px;
+}
+
+.content .progress-bar .progress {
+    height: 100%;
+    background: var(--main-bg);
+    border-radius: inherit;
+    transition: all 0.25s ease-in-out;
+}
+
+#tab1 {
+    text-align: center;
+}
+
+.input-container {
+    position: relative;
+    padding: 10px 15px;
+}
+
+.input-container .input {
+    width: 100%;
+    border: 2px dashed var(--main-bg);
+    border-radius: 5px;
+    padding: 10px 10px;
+    padding-right: 35px;
+    box-sizing: border-box;
+    font-size: 15px;
+    outline: none;
+    color: #0000008c;
+}
+
+.input-container .input:focus {
+     border: 2px solid var(--light-0-color)
+}
+
+.fa-copy {
+    position: absolute;
+    font-size: 22px;
+    right: 25px;
+    top: 20px;
+    cursor: pointer;
+    color: var(--main-bg)
+}
+
+.fa-copy:hover {
+    color: var(--light-0-color)
+}
+
+
+
+/* toast styling goes hear  */
+
+
+#toast {
+    box-sizing: border-box;
+    position: absolute;
+    top: 10px;
+    max-width: 360px;
+    right: 0;
+    padding: 10px 10px;
+    background-color: white;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    border-left: 6px solid #74C365;
+    border-radius: 7px;
+    transform: translate(400px);
+    transition: 0.5s;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+}
+
+.fa-solid {
+    font-size: 30px;
+    color: #74C365;
+}
+
+.toast .text {
+    font-size: 20px;
+    font-weight: 400;
+    color: #666666;
+}
+
+.text-1 {
+    font-weight: 600;
+    color: #333;
+}
+
+.text-2 {
+    color: #656565;
+    font-weight: 400;
+}
+
+#closeToast {
+    align-self: flex-start;
+    background-color: transparent;
+    font-size: 25px;
+    line-height: 40px;
+    color: var(--text-dark-color);
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+#closeToast:hover {
+    transform: rotate(180deg);
+}

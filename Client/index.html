@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="images/logo.png" />
+    <title>shareBuddy - a Simple.Beautiful.Seamless File Sharing App</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <!-- Fontawesome CDN Link For Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="main">
+      <!-- Navigation Menu  -->
+      <nav class="container">
+        <div class="logo">
+          <img src="images/logo.png" alt="shareBuddyLogo" />
+          <span>shareBuddy</span>
+        </div>
+        <div class="rightMenu">
+          <a href="./shortner.html"><button class="btn url-shortner-btn">URL Shortner</button></a>
+        </div>
+      </nav>
+
+      <!-- Heading goes here -->
+      <div class="section-wrapper">
+        <div class="main-heading container">
+          <span>Where Sharing Happens!</span> <br />
+          <span>Simple. Beautiful. Seamless</span>
+        </div>
+
+        <!-- section which contain share pic and file sharing form  -->
+        <section class="container">
+          <div class="left-section">
+            <lottie-player
+              src="https://lottie.host/d00b1eda-485f-4396-9b93-7243f3dccc38/CgPkpySqUi.json"
+              background="transparent"
+              speed="1"
+              style="width: 300px; height: 300px"
+              loop
+              autoplay
+            ></lottie-player>
+          </div>
+
+          <div class="right-section">
+            <div class="upload-container">
+              <div class="drop-zone">
+                <input type="file" id="fileinput" />
+                <label for="fileinput">
+                  <div class="uploadBtn">
+                    <img src="images/upload.png" alt="" draggable="false" />
+                  </div>
+                </label>
+                <h2>Drop it like its hot!</h2>
+                <span> size limit 100 mb </span>
+
+                <div class="progress-area">
+                  <li class="row">
+                    <i class="fas fa-file-alt"></i>
+                    <div class="content">
+                      <div class="details">
+                        <span class="name"><span classUploading...</span>
+                        <span><span class="percent">0</span>%</span>
+                      </div>
+                      <div class="progress-bar">
+                        <div class="progress"></div>
+                      </div>
+                    </div>
+                  </li>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Footer goes here -->
+      <!-- <footer class="container">
+        Designed & Built by <a href=""> Ashish </a> | <a href="">Ankita</a> |
+        <a href="">Manish</a>
+      </footer> -->
+    </div>
+    <!-- popup model for send file as email -->
+    <div class="tab-container">
+      <i class="fa-solid fa-circle-xmark close-tab"></i>
+      <div class="menu-tabs">
+        <button class="tab btn" onclick="openTab(event, 'tab1')">Link</button>
+        <button class="tab btn" onclick="openTab(event, 'tab2')">
+          Send Via Email
+        </button>
+      </div>
+
+      <div id="tab1" class="tab-content">
+        <p class="expire">Link expires in 24 hrs</p>
+        <div class="input-container">
+          <input class="input" type="text" id="fileURL" readonly />
+          <i class="fa-sharp fa-regular fa-copy" id="copyBtn"></i>
+        </div>
+      </div>
+      <div id="tab2" class="tab-content">
+        <form id="myform">
+          <div class="form-group to">
+            <label for="to">To</label>
+            <input type="email" id="to" placeholder="example@gmail.com" />
+          </div>
+          <div class="form-group subject">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" placeholder="File Sharing" />
+          </div>
+          <div class="form-group message">
+            <label for="message">Message</label>
+            <input
+              type="text"
+              id="message"
+              placeholder="Hi, sending files with shareBuddy"
+            />
+          </div>
+
+          <div class="submit-btn-wrapper">
+            <span class="expires">Expires within 24 hours</span>
+            <button
+              class="submit-btn btn"
+              type="submit"
+              onclick="submitForm(event)"
+            >
+              Send
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- popup model for email sent confirmation  -->
+    <div class="signup_success container">
+      <i class="fa-solid fa-check item"> </i>
+      <p class="item">Your Email has been sent</p>
+      <p class="item">Thankyou for Choosing shareBuddy</p>
+      <button class="signup_success_btn item">OK</button>
+    </div>
+
+    <!-- toast  -->
+
+    <div id="toast">
+      <i class="fa-solid" id="toastIcon"></i>
+      <!-- fa-circle-exclamation -->
+
+      <div>
+        <span class="text text-1">Success</span> <br />
+        <span class="text text-2">Your changes has been saved</span>
+      </div>
+      <i
+        id="closeToast"
+        onclick="closeToast()"
+        class="fa-regular fa-circle-xmark"
+      ></i>
+    </div>
+
+    <script>
+      window.addEventListener("load", function () {
+        // Open Tab 1 by default
+        document.getElementById("tab1").style.display = "block";
+        document.getElementsByClassName("tab")[0].classList.add("active");
+      });
+      function openTab(event, tabName) {
+        var tabContents = document.getElementsByClassName("tab-content");
+        var tabs = document.getElementsByClassName("tab");
+
+        for (var i = 0; i < tabContents.length; i++) {
+          tabContents[i].style.display = "none";
+        }
+
+        for (var i = 0; i < tabs.length; i++) {
+          tabs[i].className = tabs[i].className.replace(" active", "");
+        }
+
+        document.getElementById(tabName).style.display = "block";
+        event.currentTarget.className += " active";
+      }
+    </script>
+    <script src="./script.js"></script>
+  </body>
+</html>

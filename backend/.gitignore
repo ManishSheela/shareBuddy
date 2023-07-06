@@ -4,8 +4,8 @@
 .env
 /.pnp
 .pnp.js
-# uploads/*
-# uploads/.gitkeep
+uploads/*
+!uploads/.gitkeep
 # testing
 /coverage
 

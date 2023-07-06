@@ -431,6 +431,7 @@ form select.error {
 
 .content .progress-bar .progress {
     height: 100%;
+    width: 0;
     background: var(--main-bg);
     border-radius: inherit;
     transition: all 0.25s ease-in-out;

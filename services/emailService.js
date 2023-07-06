@@ -14,13 +14,13 @@ async function sendMail({ from, to, subject, text, html }) {
   // async..await is not allowed in global scope, must use a wrapper
 
   const info = await transporter.sendMail({
-    from: process.env.MAIL_USER,
+    from: `sharBuddy <${from}>`,
     to,
     subject,
     text,
     html,
   });
-
+   
   console.log("Message sent: %s", info.messageId);
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 }

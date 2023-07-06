@@ -46,24 +46,21 @@ router.post("/", upload.single("myfile"), async (req, res) => {
 
 // send mail route
 router.post("/send", async (req, res) => {
-  const { uuid, emailFrom, emailTo, subject, message } = req.body;
+  const { uuid, emailTo, subject, message } = req.body;
+  const emailFrom = process.env.MAIL_USER;
   // validate request
-  if (!uuid || !emailFrom || !emailTo) {
-    return res
-      .status(422)
-      .send({
-        error: "All fields are required except expiry, subject, message .",
-      });
+  if (!uuid || !emailTo) {
+    return res.status(422).send({
+      error: "Please enter mail",
+    });
   }
 
   // get data from database
   const file = await File.findOne({ uuid: uuid });
-  if (file.sender) {
+  const isEmailPresent = file.receiver.includes(emailTo);
+  if (isEmailPresent) {
     return res.status(422).send({ error: "Email already sent once." });
   }
-  file.sender = emailFrom;
-  file.receiver = emailTo;
-  const response = await file.save();
 
   // now send file
   const sendMail = require("../services/emailService");
@@ -72,10 +69,24 @@ router.post("/send", async (req, res) => {
     to: emailTo,
     subject,
     text: message,
-    html: `<h1> Hello from shareBuddy</h1>`,
-  });
-
+    html: require("../services/mailTemplate")({
+      emailFrom,
+      emailTo: emailTo.split("@")[0],
+      message,
+      downloadLink: `${process.env.APP_BASE_URL}/files/${file.uuid}?source=email`,
+      size: parseInt(file.size / 1000) + " KB",
+      expires: "24 hours",
+    }),
+  })
+    .then(() => {
+      file.sender = emailFrom;
+      file.receiver.push(emailTo);
+      const response = file.save();
+      return res.json({ success: true });
+    })
+    .catch((err) => {
+      return res.status(500).json({ error: "Error in email sending." });
+    });
 });
-
 
 module.exports = router;
